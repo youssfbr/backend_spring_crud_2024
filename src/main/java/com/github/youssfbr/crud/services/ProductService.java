@@ -4,6 +4,7 @@ import com.github.youssfbr.crud.entities.Product;
 import com.github.youssfbr.crud.entities.RequestProductDTO;
 import com.github.youssfbr.crud.entities.ResponseProductDTO;
 import com.github.youssfbr.crud.repositories.IProductRepository;
+import com.github.youssfbr.crud.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +33,7 @@ public class ProductService implements IProductService {
     public ResponseProductDTO getProductById(String id) {
         return productRepository.findById(id)
                 .map(ResponseProductDTO::new)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Entity not found with id: " + id));
     }
 
     @Override
