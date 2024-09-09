@@ -1,11 +1,12 @@
 package com.github.youssfbr.crud.controllers;
 
 import com.github.youssfbr.crud.entities.Product;
+import com.github.youssfbr.crud.entities.RequestProductDTO;
+import com.github.youssfbr.crud.entities.ResponseProductDTO;
 import com.github.youssfbr.crud.services.IProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,8 +21,21 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
+    public ResponseEntity<List<ResponseProductDTO>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProducts());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ResponseProductDTO> getAllProducts(@PathVariable String id) {
+        return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Product> registerProduct(@RequestBody @Valid RequestProductDTO data) {
+
+        final Product productCreated = productService.createProduct(data);
+
+        return ResponseEntity.ok(productCreated);
     }
 
 }

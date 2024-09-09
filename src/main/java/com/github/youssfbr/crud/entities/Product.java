@@ -22,4 +22,8 @@ public class Product {
 
     private Double price;
 
+    public Product(RequestProductDTO requestProductDTO) {
+        name = requestProductDTO.name();
+        price = requestProductDTO.price();
+    }
 }
