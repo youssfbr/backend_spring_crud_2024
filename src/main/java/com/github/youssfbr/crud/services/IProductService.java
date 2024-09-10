@@ -1,6 +1,5 @@
 package com.github.youssfbr.crud.services;
 
-import com.github.youssfbr.crud.entities.Product;
 import com.github.youssfbr.crud.entities.RequestProductDTO;
 import com.github.youssfbr.crud.entities.ResponseProductDTO;
 
@@ -12,6 +11,6 @@ public interface IProductService {
 
     ResponseProductDTO getProductById(String id);
 
-    Product createProduct(RequestProductDTO data);
+    ResponseProductDTO createProduct(RequestProductDTO data);
 
 }

@@ -37,9 +37,13 @@ public class ProductService implements IProductService {
     }
 
     @Override
-    public Product createProduct(RequestProductDTO data) {
+    @Transactional
+    public ResponseProductDTO createProduct(RequestProductDTO data) {
+
         final Product productToCreate = new Product(data);
-        return productRepository.save(productToCreate);
+        final Product productCreated = productRepository.save(productToCreate);
+
+        return new ResponseProductDTO(productCreated);
     }
 
 }
